@@ -10,28 +10,43 @@ Regarding the resources used for this project, all of them have the constant tha
 
 ### The parallax update.
 
-Refers to how 2 objects give the illusion that one is farther away and the other closer thanks to how much closer they are, in this case is what we want to achieve with the floor and the pipes and the mountains behind. In orther to achieve this effect we must create a local variable that allows us to assign a speed to our images to achieve the parallax effect, in this case if what we want is that the near object moves faster then we have to assign a greater value to it, while to the one that passes slower a smaller value. 
-the background looping will allow us to make the effect of an infinite background. 
+The Parallax update refers to how we manage to create an optical effect that an object is closer than another using the speed of movement, something similar to what happens when we are on the road and we see the cars next to us approaching and moving away very quickly while the mountains seem to be moving very slowly.
 
-In addition, to be able to update the speed, we will use the variable delta time, which will increase with time and will be multiplied with the values we have already assigned, finally, if the looping does not coincide and we do not calculate it in the correct way what we will cause is that our back image will be cut off.
+To achieve this effect we must create local variables for each of the objects with which we want to simulate this reaction, with these variables what we will do is to select an integer that symbolizes the speed at which we are going to move it. 
+
+To make an object appear to be very far away we must make it move slower than the other objects that we want to simulate proximity.
+In the particular case of our video game, the objects that seem closer are the buildings that we have to dodge, therefore in the constant that we select and that we will later use is composed of a lower number than the one we give to the speed of our object that we want to seem farther away, in this case the sky and other buildings.
+
+### Infinite Path
+
+Another of the effects that we want to simulate in our video game is that of an infinite path, which we will achieve using a background with a beginning and end that allows an indefinite continuation, so that the effect is adequate we calculate the measures of the window and the virtual, because depending on these dimensions we will make that fits to the perfection the length of our background so that the cut of the image of behind is not noticed. 
+
+The method that will allow us to do this is called background looping. 
+Once we have the speed values of our background and ground we will use a variable that will allow us to increase the speed progressively, this variable will be used whenever we want to increase the speed of the game, both background and ground, as well as the speed of our flying frog. The variable we mention is "deltaTime" (dt).
+
 
 ### Gravity
 
-To be able to simulate the gravity in a 2d game we have to use again delta time that is going to be increasing as the time passes, achieving the effect that really happens with the gravity that the things are falling faster and faster. 
+As we have to make our little flying frog fall as he goes, unless we press the key to make him jump, we are going to simulate gravity in the game. Previously we mentioned that dt was going to serve us also for this purpose, so we will use a new class for frog in which once we have defined our gravity constant we will make it multiply with the value of speed that we already had in the frog object and later we will multiply it by the dt. All this is observed in the method Dude:update(dt). 
 
-First we have to go to the Dude class to be able to define the value of the gravity that we are going to use. 
-in that place we go to the Dude:update(dt) 
-where we see the gravity constant which was the value we gave multiplied by delta time and added with the same velocity of the object. 
 
-Once we have gravity we must look for the effect of the jump.
-for that it will be necessary 
-in the Dude class we must place a negative constant that will make us rise giving the jump effect, and we must define the function that will allow us to know if a key was pressed and if that key coincides with the one that we configured to activate the conditional to jump. 
+### Jumping
+
+For the jumping effect that our frog object will have, we will use the same components for the gravity simulation, only that in the frog class we will assign a negative constant so that it goes in the opposite direction of where it goes with gravity.
+
+To activate this jump function that will have our frog object we have to allow the reading of the pressure of our keys, because usually only a certain number of keys are those that have a functionality within the game, in our case it is the "Space" key that will activate the jump function, otherwise our frog will continue to fall waiting for activation to dodge the buildings. In the case that our frog collides with any of the buildings or falls to the ground, we must make the game end and the speeds of the background and ground, as well as those of the buildings and our frog are paralyzed, to achieve this we use a Boolean in a Scrolling function that will identify if the frog has fulfilled any of the conditions that we determine to lose. 
 
 ### Infinite Pipes
 
-Now to achieve the effect of the infinite pipes what we will do, what we put in the pipe class is to mention that it is going to be created in the virtual window which means that for the user it will not be perceptible yet, but when he enters the window it will already be visible, this is important to understand it because it is precisely what is used to give the illusion that it is infinite, it is to use the virtual to create things and then that they are already seen in the window. 
+The effect of the infinite buildings will be achieved taking into account that the window and the virtual are 2 different things. The window is what the player will be able to see, while the virtual is what exists in our game universe but not necessarily seen by the user, generally this area is called "DeadZone". What we will do is to use the dimensions of the virtual to create the objects of the buildings, the background and the ground although the player cannot see them yet, then all these objects that were initially created in the virtual area will already be visible when they reach the window, which is the place that the player will be able to see. 
 
-To be able to make that it is creating followed the pipes we use the spawnTimer and we conditioned it to that if it was greater to 2 then that it would create a new pipe. and well obviously we have to return its value to 0 so that it restarts the count.
+As our memory is limited, we have to try to reduce as much as possible the resources and objects stored and running in our game. Therefore we will make use of a function that deletes all the objects that are in the "DeadZone".
+
+To create the building objects, we will first make objects subject to other objects, because as we can see in the game, each point is composed of 2 buildings, one below and one above. For this composite object to be created the first thing we did was the SpawnTimer helper, which is composed of a conditional that says that if the number is greater than 2 then a new composite object must be created in a random place on the right side of the virtual one. When the composite object is created we must reset the count so that a space between buildings is respected.
+
+### Game Over and Game Restarting
+
+The recognition of the loss of the frog is achieved with a box generally called "collider" in which we will give it some values that mean its dimensions, and in the case that this collider has contact with the buildings, we will activate the Scrolling method previously mentioned to stop the game.
 
 ## State Machine
 
