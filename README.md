@@ -65,6 +65,7 @@ In our machine state we can see that the first state is when we are waiting for 
     - https://www.dafont.com/es/search.php?q=cyberpunk
     - https://www.piskelapp.com/
     - https://www.deviantart.com/jecksfox/art/it-is-wednesday-my-dudes-829944162
+    - http://angusj.com/resourcehacker/
 
 - Mentoring:
 
