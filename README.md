@@ -37,7 +37,7 @@ To be able to make that it is creating followed the pipes we use the spawnTimer 
 
 In our machine state we can see that the first state is when we are waiting for the user to press the Space key to start the movement effect and the objects that we must avoid are generated, this state is known as Playstate, in which we create the illusion that the frog jumps to avoid colliding with the buildings, finally when we collide with one of these objects, it will mark our Score achieved in this game and the cycle will restart again waiting for the key to be pressed to start playing again.
 
-![Alt text](FlappyDude.jpg?raw=true "Flappy Dude")
+![Alt text](FlappyDude.png?raw=true "Flappy Dude")
 
 ## Resources Used
 
